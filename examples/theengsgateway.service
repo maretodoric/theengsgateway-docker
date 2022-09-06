@@ -1,0 +1,16 @@
+[Unit]
+Description=TheengsGateway BLE Gateway Service
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/theengsgateway
+ExecStartPre=docker compose down
+ExecStartPre=docker compose rm -f
+ExecStartPre=docker compose pull
+ExecStart=docker compose up
+ExecStop=docker compose down
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
