@@ -46,7 +46,12 @@ valueerr(){
 	exit 1
 }
 
-. .env
+if [ -f .env ]; then
+	. .env
+else
+	echo "ERROR. .env file does not exist in current directory. Must exist and contain at least VERSION, BUILDX, BUILDX_PURGE variables"
+	exit 1
+fi
 
 until [ $# -eq 0 ]; do
 	case $1 in
@@ -154,9 +159,14 @@ Version: $VERSION
 Repo: $REPO
 Image Name: $IMAGENAME
 Registry: ${REGISTRY:=Default}
+Full Image Name: $REPO/$IMAGENAME-{arch}
+
+Waiting 5 seconds before continuing, you can CTRL+C now to abort.
 EOF
 
-exit
+for i in {1..5}; do
+	sleep 1
+done
 
 if [[ $BUILDX == true ]]; then
 	if [[ $BUILDX_PURGE == true ]]; then
