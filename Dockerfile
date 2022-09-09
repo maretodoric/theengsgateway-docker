@@ -6,7 +6,7 @@ RUN python3 -m venv /opt/venv && \
         source /opt/venv/bin/activate && \
         apt update && apt install --no-install-recommends -y bluez && \
 	pip install --upgrade pip && \
-        pip install --extra-index-url=https://www.piwheels.org/simple TheengsGateway
+        pip install --extra-index-url=https://www.piwheels.org/simple TheengsGateway==0.5.0
 
 COPY chroot /
 
