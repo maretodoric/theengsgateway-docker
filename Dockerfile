@@ -1,12 +1,11 @@
-FROM python:3.10-bullseye
+FROM python:3.9-bullseye
 
 SHELL ["/bin/bash", "-ec"]
 
+RUN apt update && apt install --no-install-recommends -y bluez
 RUN python3 -m venv /opt/venv && \
         source /opt/venv/bin/activate && \
-        apt update && apt install --no-install-recommends -y bluez && \
-	pip install --upgrade pip && \
-        pip install --extra-index-url=https://www.piwheels.org/simple TheengsGateway==0.5.0
+	pip install --upgrade --extra-index-url=https://www.piwheels.org/simple pip TheengsGateway==0.5.0
 
 COPY chroot /
 
