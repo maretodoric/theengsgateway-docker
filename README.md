@@ -79,8 +79,8 @@ services:
       DISCOVERY_TOPIC: homeassistant/sensor
       DISCOVERY_DEVICE_NAME: TheengsGateway
       DISCOVERY_FILTER: "[IBEACON,GAEN,MS-CDP]"
+      SCANNING_MODE: active
       ADAPTER: hci0
-      PASSIVE_SCAN: true
     volumes:
       - /var/run/dbus:/var/run/dbus
 ```
@@ -129,8 +129,8 @@ docker run --rm \
     -e DISCOVERY_TOPIC=homeassistant/sensor \
     -e DISCOVERY_DEVICE_NAME=TheengsGateway \
     -e DISCOVERY_FILTER="[IBEACON,GAEN,MS-CDP]" \
+    -e SCANNING_MODE=active
     -e ADAPTER=hci0 \
-    -e PASSIVE_SCAN=true \
     -v /var/run/dbus:/var/run/dbus \
     --name theengsgateway \
     maretodoric/theengsgateway-ARCH:latest
