@@ -10,6 +10,14 @@ isempty() {
         fi
 }
 
+hasvalue() {
+        if [ x"$1" == "x" ]; then
+                return 1
+        else
+                return 0
+        fi
+}
+
 # Exit if MQTT host not specified
 if isempty $MQTT_HOST; then
         echo "MQTT Host not defined, exiting"
@@ -17,7 +25,7 @@ if isempty $MQTT_HOST; then
 fi
 
 # If we enter username...
-if ! isempty $MQTT_USERNAME; then
+if hasvalue $MQTT_USERNAME; then
 	# ...we must check for password too
         if isempty $MQTT_PASSWORD; then
                 echo "MQTT_USERNAME specified without MQTT_PASSWORD"
@@ -25,11 +33,78 @@ if ! isempty $MQTT_USERNAME; then
         fi
 fi
 
-if ! isempty $PASSIVE_SCAN and [[ $PASSIVE_SCAN == true ]]; then
-	echo "Passive mode not yet implemented"
-	#echo "Enabling passive scanning mode"
-	#PARAMS="$PARAMS --scanning_mode passive"
+### Syntax checks - START
+if hasvalue $MQTT_PORT; then
+	if ! [[ $MQTT_PORT =~ ^[0-9]+$ ]]; then
+		echo "WARNING : Wrong value for MQTT_PORT environment variable, will use default - 1883"
+		MQTT_PORT=1883
+	fi
 fi
+
+if hasvalue $PUBLISH_ALL; then
+	if ! [[ $PUBLISH_ALL =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for PUBLISH_ALL environment variable, will use default - true"
+		PUBLISH_ALL=true
+	fi
+fi
+
+if hasvalue $SCAN_TIME; then
+	if ! [[ $SCAN_TIME =~ ^[0-9]+$ ]]; then
+		echo "WARNING : Wrong value for SCAN_TIME environment variable, will use default - 60"
+		SCAN_TIME=60
+	fi
+fi
+
+if hasvalue $TIME_BETWEEN; then
+	if ! [[ $TIME_BETWEEN =~ ^[0-9]+$ ]]; then
+		echo "WARNING : Wrong value for TIME_BETWEEN environment variable, will use default - 60"
+		TIME_BETWEEN=60
+	fi
+fi
+
+if hasvalue $LOG_LEVEL; then
+	if ! [[ $LOG_LEVEL =~ (DEBUG|INFO|WARNING|ERROR|CRITICAL) ]]; then
+		echo "WARNING : Wrong value for LOG_LEVEL environment variable, will use default - DEBUG"
+		LOG_LEVEL=DEBUG
+	fi
+fi
+
+
+if hasvalue $DISCOVERY; then
+	if ! [[ $DISCOVERY =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for DISCOVERY environment variable, will use default - true"
+		DISCOVERY=true
+	fi
+fi
+
+if hasvalue $PASSIVE_SCAN; then
+	# Deprecation warning, this was written before 0.5.0 was released , will use SCANNIN_MODE in future
+	echo "PASSIVE_SCAN : Deprecated environment variable, this variable will be removed in future versions, please use SCANNING_MODE=active|passive"
+
+	if [[ $PASSIVE_SCAN == true ]]; then
+		echo "Enabling passive scanning mode"
+		SCANNING_MODE="passive"
+	elif [[ $PASSIVE_SCAN == false ]]; then
+		echo "Disabling passive scanning mode"
+		SCANNING_MODE="active"
+	else
+		echo "Incorrect value for PASSIVE_SCAN environment variable, will use default - active"
+	fi
+fi
+
+if hasvalue $ADAPTER; then
+	if ! [ -d /sys/class/bluetooth/$ADAPTER ]; then
+		echo "WARNING : Adapter name $ADAPTER might not exist. Will accept the value but if you notice issues , please change it"
+	fi
+fi
+
+if hasvalue $SCANNING_MODE; then
+	if ! [[ $SCANNING_MODE =~ (active|passive) ]];
+		echo "WARNING : Wrong value for SCANNING_MODE, must be one of: active, passive. Will use default - active"
+		SCANNING_MODE=active
+	fi
+fi
+### Syntax checks - END
 
 cd $VIRTUAL_ENV
 
@@ -50,6 +125,7 @@ cat <<EOF> $CONFIG
     "discovery_topic": "${DISCOVERY_TOPIC:-homeassistant/sensor}",
     "discovery_device_name": "${DISCOVERY_DEVICE_NAME:-TheengsGateway}",
     "discovery_filter": "${DISCOVERY_FILTER:-[IBEACON,GAEN,MS-CDP]}",
+    "scanning_mode": "${SCANNING_MODE:-active}",
     "adapter": "${ADAPTER:-hci0}"
 }
 EOF
