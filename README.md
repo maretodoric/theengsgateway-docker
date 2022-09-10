@@ -1,5 +1,13 @@
 # Theengs Gateway - Docker Version
 
+|        Arch       |           Docker Image            |
+| ----------------- | --------------------------------- |
+| ![aarch64-shield] | maretodoric/theengsgateway-arm64  |
+|  ![amd64-shield]  | maretodoric/theengsgateway-amd64  |
+|  ![armv6-shield]  | maretodoric/theengsgateway-arm-v6 |
+|  ![armv7-shield]  | maretodoric/theengsgateway-arm-v7 |
+|  ![i386-shield]   | maretodoric/theengsgateway-i386   |
+
 ## Info (from their site - https://gateway.theengs.io/)
 
 **Theengs Gateway** is a multi platforms, multi devices BLE to MQTT gateway that leverages the [Theengs Decoder library](https://github.com/theengs/decoder).
@@ -156,3 +164,9 @@ Once again, MQTT_HOST is the *ONLY* required option, all others can be ommited a
 If used without MQTT_USERNAME and MQTT_PASSWORD, it will try to login annonymously, otherwise, please provide MQTT_USERNAME and MQTT_PASSWORD too.
 
 As for other configuration options for Theengs Gateway, please review any and all on [Details options](https://gateway.theengs.io/use/use.html#details-options) page on Theengs Gateway official site.
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armv6-shield]: https://img.shields.io/badge/armv6-yes-green.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
