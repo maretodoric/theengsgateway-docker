@@ -5,6 +5,9 @@ REPO=maretodoric
 PLATFORMS=(
 	linux/amd64
 	linux/arm64
+	linux/arm/v7
+	linux/arm/v6
+	linux/i386
 )
 
 _help() {
@@ -49,8 +52,17 @@ valueerr(){
 if [ -f .env ]; then
 	. .env
 else
-	echo "ERROR. .env file does not exist in current directory. Must exist and contain at least VERSION, BUILDX, BUILDX_PURGE variables"
-	exit 1
+	if ! [ x"$1" == "x" ] && [ -f "$1" ]; then
+		shift
+		. "$1"
+		if [ -z $VERSION ] || [ -z $BUILDX ] || [ -z $BUILDX_PURGE ]; then
+			echo "ERROR. .env file does not containt VERSION, BUILDX, BUILDX_PURGE variables"
+			exit 1
+		fi
+	else
+		echo "ERROR. .env file does not exist in current directory. Must exist and contain at least VERSION, BUILDX, BUILDX_PURGE variables"
+		exit 1
+	fi
 fi
 
 until [ $# -eq 0 ]; do
@@ -177,12 +189,12 @@ if [[ $BUILDX == true ]]; then
 	for i in ${PLATFORMS[@]}; do
 		arch=${i#*/}
 		echo "Building for platform: $i ..."
-		docker buildx build --push --platform $i -t $REPO/${IMAGENAME}-${arch}:$VERSION -t $REPO/${IMAGENAME}-${arch}:latest .
+		docker buildx build --push --platform $i -t $REPO/${IMAGENAME}-${arch//\//-}:$VERSION -t $REPO/${IMAGENAME}-${arch//\//-}:latest . || continue
 		echo "Updating readme..."
-		cp README.md README-${arch}.md
-		sed -i "s/ARCH/${arch}/g" README-${arch}.md
-		docker pushrm -f README-${arch}.md $REPO/${IMAGENAME}-${arch}
-		rm -rf README-${arch}.md
+		cp README.md README-${arch//\//-}.md
+		sed -i "s/ARCH/${arch//\//-}/g" README-${arch//\//-}.md
+		docker pushrm -f README-${arch//\//-}.md $REPO/${IMAGENAME}-${arch//\//-}
+		rm -rf README-${arch//\//-}.md
 	done
 	echo "Done!"
 else
