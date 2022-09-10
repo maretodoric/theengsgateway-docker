@@ -99,7 +99,7 @@ if hasvalue $ADAPTER; then
 fi
 
 if hasvalue $SCANNING_MODE; then
-	if ! [[ $SCANNING_MODE =~ (active|passive) ]];
+	if ! [[ $SCANNING_MODE =~ (active|passive) ]]; then
 		echo "WARNING : Wrong value for SCANNING_MODE, must be one of: active, passive. Will use default - active"
 		SCANNING_MODE=active
 	fi
