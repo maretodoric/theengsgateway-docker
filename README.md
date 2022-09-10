@@ -1,12 +1,14 @@
 # Theengs Gateway - Docker Version
 
-|        Arch       |           Docker Image            |
-| ----------------- | --------------------------------- |
-| ![aarch64-shield] | maretodoric/theengsgateway-arm64  |
-|  ![amd64-shield]  | maretodoric/theengsgateway-amd64  |
-|  ![armv6-shield]  | maretodoric/theengsgateway-arm-v6 |
-|  ![armv7-shield]  | maretodoric/theengsgateway-arm-v7 |
-|  ![i386-shield]   | maretodoric/theengsgateway-i386   |
+![current-version]
+
+|        Arch       |               Docker Image               |
+| ----------------- | ---------------------------------------- |
+| ![aarch64-shield] | maretodoric/theengsgateway-arm64:latest  |
+|  ![amd64-shield]  | maretodoric/theengsgateway-amd64:latest  |
+|  ![armv6-shield]  | maretodoric/theengsgateway-arm-v6:latest |
+|  ![armv7-shield]  | maretodoric/theengsgateway-arm-v7:latest |
+|  ![i386-shield]   | maretodoric/theengsgateway-i386:latest   |
 
 ## Info (from their site - https://gateway.theengs.io/)
 
@@ -170,3 +172,4 @@ As for other configuration options for Theengs Gateway, please review any and al
 [armv6-shield]: https://img.shields.io/badge/armv6-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
+[current-version]: https://img.shields.io/badge/Current%20Version-0.5.0.1-blue
