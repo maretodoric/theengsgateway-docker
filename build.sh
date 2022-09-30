@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGENAME=theengsgateway
-REPO=maretodoric
+REPO=theengs
 PLATFORMS=(
 	linux/amd64
 	linux/arm64
