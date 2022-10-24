@@ -77,6 +77,13 @@ if hasvalue $DISCOVERY; then
 	fi
 fi
 
+if hasvalue $HAAS_DISCOVERY; then
+	if ! [[ $HAAS_DISCOVERY =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for DISCOVERY environment variable, will use default - true"
+		HAAS_DISCOVERY=true
+	fi
+fi
+
 if hasvalue $PASSIVE_SCAN; then
 	# Deprecation warning, this was written before 0.5.0 was released , will use SCANNIN_MODE in future
 	echo "PASSIVE_SCAN : Deprecated environment variable, this variable will be removed in future versions, please use SCANNING_MODE=active|passive"
@@ -116,12 +123,13 @@ cat <<EOF> $CONFIG
     "user": "$MQTT_USERNAME",
     "port": ${MQTT_PORT:-1883},
     "publish_topic": "${MQTT_PUB_TOPIC:-home/TheengsGateway/BTtoMQTT}",
-    "subscribe_topic": "${MQTT_SUB_TOPIC:-home/TheengsGateway/commands}",
+    "subscribe_topic": "${MQTT_SUB_TOPIC:-home/+/BTtoMQTT/undecoded}",
     "publish_all": ${PUBLISH_ALL:-true},
     "ble_scan_time": ${SCAN_TIME:-60},
     "ble_time_between_scans": ${TIME_BETWEEN:-60},
     "log_level": "${LOG_LEVEL:-DEBUG}",
     "discovery": ${DISCOVERY:-true},
+    "haas_discovery": ${HAAS_DISCOVERY:-true},
     "discovery_topic": "${DISCOVERY_TOPIC:-homeassistant/sensor}",
     "discovery_device_name": "${DISCOVERY_DEVICE_NAME:-TheengsGateway}",
     "discovery_filter": "${DISCOVERY_FILTER:-[IBEACON,GAEN,MS-CDP]}",

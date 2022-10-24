@@ -40,11 +40,13 @@ services:
       MQTT_USERNAME: <username>
       MQTT_PASSWORD: <password>
       MQTT_PUB_TOPIC: home/TheengsGateway/BTtoMQTT
-      MQTT_SUB_TOPIC: home/TheengsGateway/commands
+      MQTT_SUB_TOPIC: home/+/BTtoMQTT/undecoded
       PUBLISH_ALL: true
       TIME_BETWEEN: 60
       SCAN_TIME: 60
       LOG_LEVEL: DEBUG
+      DISCOVERY: true
+      HAAS_DISCOVERY: true
       DISCOVERY_TOPIC: homeassistant/sensor
       DISCOVERY_DEVICE_NAME: TheengsGateway
       DISCOVERY_FILTER: "[IBEACON,GAEN,MS-CDP]"
@@ -90,11 +92,13 @@ docker run --rm \
     -e MQTT_USERNAME=<username> \
     -e MQTT_PASSWORD=<password> \
     -e MQTT_PUB_TOPIC=home/TheengsGateway/BTtoMQTT \
-    -e MQTT_SUB_TOPIC=home/TheengsGateway/commands \
+    -e MQTT_SUB_TOPIC=home/+/BTtoMQTT/undecoded \
     -e PUBLISH_ALL=true \
     -e TIME_BETWEEN=60 \
     -e SCAN_TIME=60 \
     -e LOG_LEVEL=DEBUG \
+    -e DISCOVERY=true \
+    -e HAAS_DISCOVERY=true \
     -e DISCOVERY_TOPIC=homeassistant/sensor \
     -e DISCOVERY_DEVICE_NAME=TheengsGateway \
     -e DISCOVERY_FILTER="[IBEACON,GAEN,MS-CDP]" \

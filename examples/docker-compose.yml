@@ -2,18 +2,20 @@ version: '3.1'
 
 services:
   theengsgateway:
-    image: maretodoric/theengsgateway-arm64:latest
+    image: theengs/gateway:latest
     network_mode: host
     environment:
       MQTT_HOST: 192.168.0.200
       MQTT_USERNAME: username
       MQTT_PASSWORD: ubersecretpassword
       MQTT_PUB_TOPIC: home/TheengsGateway/BTtoMQTT
-      MQTT_SUB_TOPIC: home/TheengsGateway/commands
+      MQTT_SUB_TOPIC: home/+/BTtoMQTT/undecoded
       PUBLISH_ALL: true
       TIME_BETWEEN: 60
-      SCAN_TIME: 60
+      SCAN_TIME: 5
       LOG_LEVEL: DEBUG
+      DISCOVERY: true
+      HAAS_DISCOVERY: true
       DISCOVERY_TOPIC: homeassistant/sensor
       DISCOVERY_DEVICE_NAME: TheengsGateway
       DISCOVERY_FILTER: "[IBEACON,GAEN,MS-CDP]"
