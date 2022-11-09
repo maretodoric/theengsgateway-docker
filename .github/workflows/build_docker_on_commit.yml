@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_TAG: theengs/gateway:$(date +%s)
+  IMAGE_TAG: "theengs/gateway:test"
 
 jobs:
 
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag "${IMAGE_TAG}"
+      run: docker build --tag "${IMAGE_TAG}" .
     - name: Save Docker image
       run: docker save --output image.tar "${IMAGE_TAG}"
     - name: Upload Docker image
