@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  IMAGE_TAG: theengs/gateway:$(date +%s)
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag "${IMAGE_TAG}"
+    - name: Save Docker image
+      run: docker save --output image.tar "${IMAGE_TAG}"
+    - name: Upload Docker image
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-image
+        path: image.tar
+        retention-days: 1
