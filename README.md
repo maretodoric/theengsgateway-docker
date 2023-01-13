@@ -44,7 +44,7 @@ services:
       SCAN_TIME: 60
       LOG_LEVEL: DEBUG
       DISCOVERY: true
-      HAAS_DISCOVERY: true
+      HASS_DISCOVERY: true
       DISCOVERY_TOPIC: homeassistant/sensor
       DISCOVERY_DEVICE_NAME: TheengsGateway
       DISCOVERY_FILTER: "[IBEACON,GAEN,MS-CDP]"
@@ -96,7 +96,7 @@ docker run --rm \
     -e SCAN_TIME=60 \
     -e LOG_LEVEL=DEBUG \
     -e DISCOVERY=true \
-    -e HAAS_DISCOVERY=true \
+    -e HASS_DISCOVERY=true \
     -e DISCOVERY_TOPIC=homeassistant/sensor \
     -e DISCOVERY_DEVICE_NAME=TheengsGateway \
     -e DISCOVERY_FILTER="[IBEACON,GAEN,MS-CDP]" \

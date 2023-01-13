@@ -77,10 +77,10 @@ if hasvalue $DISCOVERY; then
 	fi
 fi
 
-if hasvalue $HAAS_DISCOVERY; then
-	if ! [[ $HAAS_DISCOVERY =~ (true|false) ]]; then
+if hasvalue $HASS_DISCOVERY; then
+	if ! [[ $HASS_DISCOVERY =~ (true|false) ]]; then
 		echo "WARNING : Wrong value for DISCOVERY environment variable, will use default - true"
-		HAAS_DISCOVERY=true
+		HASS_DISCOVERY=true
 	fi
 fi
 
@@ -129,7 +129,7 @@ cat <<EOF> $CONFIG
     "ble_time_between_scans": ${TIME_BETWEEN:-60},
     "log_level": "${LOG_LEVEL:-DEBUG}",
     "discovery": ${DISCOVERY:-true},
-    "haas_discovery": ${HAAS_DISCOVERY:-true},
+    "hass_discovery": ${HASS_DISCOVERY:-true},
     "discovery_topic": "${DISCOVERY_TOPIC:-homeassistant/sensor}",
     "discovery_device_name": "${DISCOVERY_DEVICE_NAME:-TheengsGateway}",
     "discovery_filter": "${DISCOVERY_FILTER:-[IBEACON,GAEN,MS-CDP]}",
