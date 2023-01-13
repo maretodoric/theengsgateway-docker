@@ -1,7 +1,5 @@
 # Theengs Gateway - Docker Version
 
-![current-version]
-
 |        Arch       |               Docker Image               |
 | ----------------- | ---------------------------------------- |
 | ![aarch64-shield] | theengs/gateway-arm64:latest  |
