@@ -48,6 +48,13 @@ if hasvalue $PUBLISH_ALL; then
 	fi
 fi
 
+if hasvalue $PRESENCE; then
+	if ! [[ $PRESENCE =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for PRESENCE environment variable, will use default - false"
+		PRESENCE=false
+	fi
+fi
+
 if hasvalue $SCAN_TIME; then
 	if ! [[ $SCAN_TIME =~ ^[0-9]+$ ]]; then
 		echo "WARNING : Wrong value for SCAN_TIME environment variable, will use default - 60"
@@ -132,6 +139,8 @@ cat <<EOF> $CONFIG
     "port": ${MQTT_PORT:-1883},
     "publish_topic": "${MQTT_PUB_TOPIC:-home/TheengsGateway/BTtoMQTT}",
     "subscribe_topic": "${MQTT_SUB_TOPIC:-home/+/BTtoMQTT/undecoded}",
+    "presence_topic": "${MQTT_PRE_TOPIC:-home/presence/TheengsGateway}",
+    "presence": ${PRESENCE:-false},
     "publish_all": ${PUBLISH_ALL:-true},
     "ble_scan_time": ${SCAN_TIME:-60},
     "ble_time_between_scans": ${TIME_BETWEEN:-60},

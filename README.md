@@ -39,6 +39,8 @@ services:
       MQTT_PASSWORD: <password>
       MQTT_PUB_TOPIC: home/TheengsGateway/BTtoMQTT
       MQTT_SUB_TOPIC: home/+/BTtoMQTT/undecoded
+      MQTT_PRE_TOPIC: home/presence/TheengsGateway
+      PRESENCE: false
       PUBLISH_ALL: true
       TIME_BETWEEN: 60
       SCAN_TIME: 60
@@ -93,6 +95,8 @@ docker run --rm \
     -e MQTT_PASSWORD=<password> \
     -e MQTT_PUB_TOPIC=home/TheengsGateway/BTtoMQTT \
     -e MQTT_SUB_TOPIC=home/+/BTtoMQTT/undecoded \
+    -e MQTT_PRE_TOPIC=home/presence/TheengsGateway \
+    -e PRESENCE=false \
     -e PUBLISH_ALL=true \
     -e TIME_BETWEEN=60 \
     -e SCAN_TIME=60 \
