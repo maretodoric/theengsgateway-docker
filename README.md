@@ -50,6 +50,8 @@ services:
       DISCOVERY_FILTER: "[IBEACON,GAEN,MS-CDP]"
       SCANNING_MODE: active
       ADAPTER: hci0
+      TIME_SYNC: "[]"
+      TIME_FORMAT: 0
     volumes:
       - /var/run/dbus:/var/run/dbus
 ```
@@ -102,6 +104,8 @@ docker run --rm \
     -e DISCOVERY_FILTER="[IBEACON,GAEN,MS-CDP]" \
     -e SCANNING_MODE=active
     -e ADAPTER=hci0 \
+    -e TIME_SYNC="[]" \
+    -e TIME_FORMAT=0 \
     -v /var/run/dbus:/var/run/dbus \
     --name theengsgateway \
     theengs/gateway-ARCH:latest

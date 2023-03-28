@@ -111,6 +111,14 @@ if hasvalue $SCANNING_MODE; then
 		SCANNING_MODE=active
 	fi
 fi
+
+
+if hasvalue $TIME_FORMAT; then
+	if ! [[ $TIME_FORMAT =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for TIME_FORMAT environment variable, will use default - false"
+		TIME_FORMAT=false
+	fi
+fi
 ### Syntax checks - END
 
 cd $VIRTUAL_ENV
@@ -134,7 +142,9 @@ cat <<EOF> $CONFIG
     "discovery_device_name": "${DISCOVERY_DEVICE_NAME:-TheengsGateway}",
     "discovery_filter": "${DISCOVERY_FILTER:-[IBEACON,GAEN,MS-CDP]}",
     "scanning_mode": "${SCANNING_MODE:-active}",
-    "adapter": "${ADAPTER:-hci0}"
+    "adapter": "${ADAPTER:-hci0}",
+    "time_sync": "${TIME_SYNC:-[]}",
+    "time_format": "${TIME_FORMAT:-0}"
 }
 EOF
 cat $CONFIG
