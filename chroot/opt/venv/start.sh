@@ -151,6 +151,7 @@ cat <<EOF> $CONFIG
     "ble_scan_time": ${SCAN_TIME:-60},
     "ble_time_between_scans": ${TIME_BETWEEN:-60},
     "log_level": "${LOG_LEVEL:-DEBUG}",
+    "lwt_topic": "${LWT_TOPIC:-home/TheengsGateway/LWT}",
     "discovery": ${DISCOVERY:-true},
     "hass_discovery": ${HASS_DISCOVERY:-true},
     "discovery_topic": "${DISCOVERY_TOPIC:-homeassistant/sensor}",
