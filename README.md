@@ -42,6 +42,7 @@ services:
       MQTT_PRE_TOPIC: home/presence/TheengsGateway
       PRESENCE: false
       PUBLISH_ALL: true
+      PUBLISH_ADVDATA: false
       TIME_BETWEEN: 60
       SCAN_TIME: 60
       LOG_LEVEL: DEBUG
@@ -98,6 +99,7 @@ docker run --rm \
     -e MQTT_PRE_TOPIC=home/presence/TheengsGateway \
     -e PRESENCE=false \
     -e PUBLISH_ALL=true \
+    -e PUBLISH_ADVDATA=false \
     -e TIME_BETWEEN=60 \
     -e SCAN_TIME=60 \
     -e LOG_LEVEL=DEBUG \

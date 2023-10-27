@@ -48,6 +48,13 @@ if hasvalue $PUBLISH_ALL; then
 	fi
 fi
 
+if hasvalue $PUBLISH_ADVDATA; then
+	if ! [[ $PUBLISH_ADVDATA =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for PUBLISH_ADVDATA environment variable, will use default - false"
+		PUBLISH_ADVDATA=false
+	fi
+fi
+
 if hasvalue $PRESENCE; then
 	if ! [[ $PRESENCE =~ (true|false) ]]; then
 		echo "WARNING : Wrong value for PRESENCE environment variable, will use default - false"
@@ -75,7 +82,6 @@ if hasvalue $LOG_LEVEL; then
 		LOG_LEVEL=DEBUG
 	fi
 fi
-
 
 if hasvalue $DISCOVERY; then
 	if ! [[ $DISCOVERY =~ (true|false) ]]; then
@@ -119,7 +125,6 @@ if hasvalue $SCANNING_MODE; then
 	fi
 fi
 
-
 if hasvalue $TIME_FORMAT; then
 	if ! [[ $TIME_FORMAT =~ (true|false) ]]; then
 		echo "WARNING : Wrong value for TIME_FORMAT environment variable, will use default - false"
@@ -142,6 +147,7 @@ cat <<EOF> $CONFIG
     "presence_topic": "${MQTT_PRE_TOPIC:-home/presence/TheengsGateway}",
     "presence": ${PRESENCE:-false},
     "publish_all": ${PUBLISH_ALL:-true},
+    "publish_advdata": ${PUBLISH_ADVDATA:-false},
     "ble_scan_time": ${SCAN_TIME:-60},
     "ble_time_between_scans": ${TIME_BETWEEN:-60},
     "log_level": "${LOG_LEVEL:-DEBUG}",
@@ -149,7 +155,7 @@ cat <<EOF> $CONFIG
     "hass_discovery": ${HASS_DISCOVERY:-true},
     "discovery_topic": "${DISCOVERY_TOPIC:-homeassistant/sensor}",
     "discovery_device_name": "${DISCOVERY_DEVICE_NAME:-TheengsGateway}",
-    "discovery_filter": "${DISCOVERY_FILTER:-[IBEACON,GAEN,MS-CDP]}",
+    "discovery_filter": "${DISCOVERY_FILTER:-[IBEACON]}",
     "scanning_mode": "${SCANNING_MODE:-active}",
     "adapter": "${ADAPTER:-hci0}",
     "time_sync": "${TIME_SYNC:-[]}",

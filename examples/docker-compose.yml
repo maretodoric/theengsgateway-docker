@@ -13,6 +13,9 @@ services:
       MQTT_PRE_TOPIC: home/presence/TheengsGateway
       PRESENCE: false
       PUBLISH_ALL: true
+      PUBLISH_ADVDATA: false
+      TIME_FORMAT: false
+      TIME_SYNC: "[]"
       TIME_BETWEEN: 60
       SCAN_TIME: 5
       LOG_LEVEL: DEBUG
@@ -20,7 +23,7 @@ services:
       HASS_DISCOVERY: true
       DISCOVERY_TOPIC: homeassistant/sensor
       DISCOVERY_DEVICE_NAME: TheengsGateway
-      DISCOVERY_FILTER: "[IBEACON,GAEN,MS-CDP]"
+      DISCOVERY_FILTER: "[IBEACON]"
       SCANNING_MODE: active
       ADAPTER: hci0
     volumes:
