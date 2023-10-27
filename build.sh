@@ -160,7 +160,6 @@ if ! [ x"$REGISTRY" == "x" ]; then
 	REPO="${REGISTRY}/$REPO"
 fi
 
-
 cat <<EOF
 Running script with following config options:
 

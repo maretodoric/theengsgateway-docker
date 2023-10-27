@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.11-slim-bullseye
 
 SHELL ["/bin/bash", "-ec"]
 
@@ -8,5 +8,4 @@ RUN python3 -m venv /opt/venv && \
 	pip install --upgrade --extra-index-url=https://www.piwheels.org/simple pip TheengsGateway==1.1.0
 
 COPY chroot /
-
 CMD source /opt/venv/bin/activate && exec /opt/venv/start.sh
