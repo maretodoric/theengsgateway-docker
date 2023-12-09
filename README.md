@@ -55,6 +55,11 @@ services:
       ADAPTER: hci0
       TIME_SYNC: "[]"
       TIME_FORMAT: 0
+      BINDKEYS: "[]"
+      ENABLE_TLS: false
+      ENABLE_WEBSOCKET: false
+      IDENTITIES: "[]"
+
     volumes:
       - /var/run/dbus:/var/run/dbus
 ```

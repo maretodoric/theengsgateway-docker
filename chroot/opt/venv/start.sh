@@ -131,6 +131,21 @@ if hasvalue $TIME_FORMAT; then
 		TIME_FORMAT=false
 	fi
 fi
+
+if hasvalue $ENABLE_TLS; then
+	if ! [[ $ENABLE_TLS =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for ENABLE_TLS environment variable, will use default - false"
+		ENABLE_TLS=false
+	fi
+fi
+
+if hasvalue $ENABLE_WEBSOCKET; then
+	if ! [[ $ENABLE_WEBSOCKET =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for ENABLE_WEBSOCKET environment variable, will use default - false"
+		ENABLE_WEBSOCKET=false
+	fi
+fi
+
 ### Syntax checks - END
 
 cd $VIRTUAL_ENV
@@ -160,7 +175,11 @@ cat <<EOF> $CONFIG
     "scanning_mode": "${SCANNING_MODE:-active}",
     "adapter": "${ADAPTER:-hci0}",
     "time_sync": "${TIME_SYNC:-[]}",
-    "time_format": "${TIME_FORMAT:-0}"
+    "time_format": "${TIME_FORMAT:-0}",
+    "bindkeys": "${BINDKEYS:-[]}",
+    "enable_tls": ${ENABLE_TLS:-false},
+    "enable_websocket": ${ENABLE_WEBSOCKET:-false},
+    "identities": "${IDENTITIES:-[]}"
 }
 EOF
 cat $CONFIG

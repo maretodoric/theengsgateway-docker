@@ -26,5 +26,10 @@ services:
       DISCOVERY_FILTER: "[IBEACON]"
       SCANNING_MODE: active
       ADAPTER: hci0
+      BINDKEYS: "[]"
+      ENABLE_TLS: false
+      ENABLE_WEBSOCKET: false
+      IDENTITIES: "[]"
+
     volumes:
       - /var/run/dbus:/var/run/dbus
