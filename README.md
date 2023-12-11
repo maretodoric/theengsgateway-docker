@@ -48,7 +48,7 @@ services:
       LOG_LEVEL: DEBUG
       DISCOVERY: true
       HASS_DISCOVERY: true
-      DISCOVERY_TOPIC: homeassistant/sensor
+      DISCOVERY_TOPIC: homeassistant
       DISCOVERY_DEVICE_NAME: TheengsGateway
       DISCOVERY_FILTER: "[IBEACON,GAEN,MS-CDP]"
       SCANNING_MODE: active
@@ -96,6 +96,7 @@ You can use following command to run if you don't have docker compose plugin ins
 ```
 docker run --rm \
     --network host \
+    --privileged \
     -e MQTT_HOST=<host_ip> \
     -e MQTT_USERNAME=<username> \
     -e MQTT_PASSWORD=<password> \
@@ -110,9 +111,9 @@ docker run --rm \
     -e LOG_LEVEL=DEBUG \
     -e DISCOVERY=true \
     -e HASS_DISCOVERY=true \
-    -e DISCOVERY_TOPIC=homeassistant/sensor \
+    -e DISCOVERY_TOPIC=homeassistant \
     -e DISCOVERY_DEVICE_NAME=TheengsGateway \
-    -e DISCOVERY_FILTER="[IBEACON,GAEN,MS-CDP]" \
+    -e DISCOVERY_FILTER="[IBEACON]" \
     -e SCANNING_MODE=active
     -e ADAPTER=hci0 \
     -e TIME_SYNC="[]" \
@@ -127,6 +128,7 @@ And again, shorten it like this if you wish to use recommended defaults (without
 ```
 docker run --rm \
     --network host \
+    --privileged \
     -e MQTT_HOST=<host_ip> \
     -v /var/run/dbus:/var/run/dbus \
     --name gateway \

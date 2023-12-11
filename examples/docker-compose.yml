@@ -21,15 +21,15 @@ services:
       LOG_LEVEL: DEBUG
       DISCOVERY: true
       HASS_DISCOVERY: true
-      DISCOVERY_TOPIC: homeassistant/sensor
+      DISCOVERY_TOPIC: homeassistant
       DISCOVERY_DEVICE_NAME: TheengsGateway
       DISCOVERY_FILTER: "[IBEACON]"
       SCANNING_MODE: active
       ADAPTER: hci0
-      BINDKEYS: "[]"
+      BINDKEYS: "{}"
       ENABLE_TLS: false
       ENABLE_WEBSOCKET: false
-      IDENTITIES: "[]"
+      IDENTITIES: "{}"
 
     volumes:
       - /var/run/dbus:/var/run/dbus

@@ -176,10 +176,8 @@ cat <<EOF> $CONFIG
     "adapter": "${ADAPTER:-hci0}",
     "time_sync": "${TIME_SYNC:-[]}",
     "time_format": "${TIME_FORMAT:-0}",
-    "bindkeys": "${BINDKEYS:-[]}",
     "enable_tls": ${ENABLE_TLS:-false},
-    "enable_websocket": ${ENABLE_WEBSOCKET:-false},
-    "identities": "${IDENTITIES:-[]}"
+    "enable_websocket": ${ENABLE_WEBSOCKET:-false}
 }
 EOF
 cat $CONFIG
