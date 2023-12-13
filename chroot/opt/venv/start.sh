@@ -151,7 +151,8 @@ fi
 cd $VIRTUAL_ENV
 
 echo "Creating config at $CONFIG ..."
-cat <<EOF> $CONFIG
+{
+    cat <<EOF
 {
     "host": "$MQTT_HOST",
     "pass": "$MQTT_PASSWORD",
@@ -178,8 +179,21 @@ cat <<EOF> $CONFIG
     "time_format": "${TIME_FORMAT:-0}",
     "enable_tls": ${ENABLE_TLS:-false},
     "enable_websocket": ${ENABLE_WEBSOCKET:-false}
-}
 EOF
+    # Conditionally include IDENTITIES if not empty
+    if [ -n "$IDENTITIES" ]; then
+        echo ",    \"identities\": $IDENTITIES"
+    fi
+
+    # Conditionally include BINDKEYS if not empty
+    if [ -n "$BINDKEYS" ]; then
+        echo ",    \"bindkeys\": $BINDKEYS"
+    fi
+
+    echo "}"
+} > $CONFIG
+
 cat $CONFIG
+
 
 python3 -m TheengsGateway $PARAMS
