@@ -108,6 +108,7 @@ docker run --rm \
     -e PUBLISH_ALL=true \
     -e PUBLISH_ADVDATA=false \
     -e TIME_BETWEEN=60 \
+    -e TRACKER_TIMEOUT=120 \
     -e SCAN_TIME=60 \
     -e LOG_LEVEL=DEBUG \
     -e DISCOVERY=true \
@@ -119,6 +120,7 @@ docker run --rm \
     -e ADAPTER=hci0 \
     -e TIME_SYNC="[]" \
     -e TIME_FORMAT=0 \
+    -e BLE=true \
     -e IDENTITIES="{\"00:11:22:33:44:55:66\":\"0dc540f3025b474b9ef1085e051b1add\",\"AA:BB:CC:DD:EE:FF\":\"6385424e1b0341109942ad2a6bb42e58\"}" \
     -e BINDKEYS="{\"00:11:22:33:44:55:66\":\"0dc540f3025b474b9ef1085e051b1add\",\"AA:BB:CC:DD:EE:FF\":\"6385424e1b0341109942ad2a6bb42e58\"}" \
     -v /var/run/dbus:/var/run/dbus \

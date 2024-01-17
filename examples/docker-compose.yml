@@ -17,6 +17,7 @@ services:
       TIME_FORMAT: false
       TIME_SYNC: "[]"
       TIME_BETWEEN: 60
+      TRACKER_TIMEOUT: 120
       SCAN_TIME: 5
       LOG_LEVEL: DEBUG
       DISCOVERY: true
@@ -29,6 +30,7 @@ services:
       BINDKEYS: "{}"
       ENABLE_TLS: false
       ENABLE_WEBSOCKET: false
+      BLE: true
       IDENTITIES: "{}"
 
     volumes:

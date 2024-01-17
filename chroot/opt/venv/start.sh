@@ -62,6 +62,13 @@ if hasvalue $PRESENCE; then
 	fi
 fi
 
+if hasvalue $BLE; then
+	if ! [[ $BLE =~ (true|false) ]]; then
+		echo "WARNING : Wrong value for BLE environment variable, will use default - true"
+		BLE=true
+	fi
+fi
+
 if hasvalue $SCAN_TIME; then
 	if ! [[ $SCAN_TIME =~ ^[0-9]+$ ]]; then
 		echo "WARNING : Wrong value for SCAN_TIME environment variable, will use default - 60"
@@ -73,6 +80,13 @@ if hasvalue $TIME_BETWEEN; then
 	if ! [[ $TIME_BETWEEN =~ ^[0-9]+$ ]]; then
 		echo "WARNING : Wrong value for TIME_BETWEEN environment variable, will use default - 60"
 		TIME_BETWEEN=60
+	fi
+fi
+
+if hasvalue $TRACKER_TIMEOUT; then
+	if ! [[ $TRACKER_TIMEOUT =~ ^[0-9]+$ ]]; then
+		echo "WARNING : Wrong value for TRACKER_TIMEOUT environment variable, will use default - 120"
+		TRACKER_TIMEOUT=120
 	fi
 fi
 
@@ -166,6 +180,7 @@ echo "Creating config at $CONFIG ..."
     "publish_advdata": ${PUBLISH_ADVDATA:-false},
     "ble_scan_time": ${SCAN_TIME:-60},
     "ble_time_between_scans": ${TIME_BETWEEN:-60},
+    "tracker_timeout": ${TRACKER_TIMEOUT:-120},
     "log_level": "${LOG_LEVEL:-DEBUG}",
     "lwt_topic": "${LWT_TOPIC:-home/TheengsGateway/LWT}",
     "discovery": ${DISCOVERY:-true},
@@ -177,6 +192,7 @@ echo "Creating config at $CONFIG ..."
     "adapter": "${ADAPTER:-hci0}",
     "time_sync": "${TIME_SYNC:-[]}",
     "time_format": "${TIME_FORMAT:-0}",
+    "ble": ${BLE:-true},
     "enable_tls": ${ENABLE_TLS:-false},
     "enable_websocket": ${ENABLE_WEBSOCKET:-false}
 EOF
